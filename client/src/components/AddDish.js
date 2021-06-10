@@ -11,20 +11,39 @@ import Button from '@material-ui/core/Button';
 
 const myStyles = makeStyles(() => ({}));
 
-const INITIAL_DISH_NAME = '';
-
-const AddDish = ({ dishNameList, setDishNameList }) => {
+const AddDish = ({
+    dishNameList,
+    ingredientNameList,
+    setIngredientNameList,
+    dish,
+    setDish,
+}) => {
     const classes = myStyles();
 
-    const [dishName, setDishName] = useState(INITIAL_DISH_NAME);
+    const [dishName, setDishName] = useState('');
+    const [ingredient, setIngredient] = useState('');
 
     const handleClickAddDishName = () => {
-        setDishNameList([...dishNameList, dishName]);
         setDishName('');
+        setDish({
+            ...dish,
+            [dishName]: [...ingredientNameList],
+        });
+        setIngredientNameList([]);
+        console.log(ingredientNameList);
+    };
+
+    const handleClickAddIngredients = () => {
+        setIngredientNameList([...ingredientNameList, ingredient]);
+        setIngredient('');
     };
 
     const handleChangeAddDishName = (e) => {
         setDishName(e.target.value);
+    };
+
+    const handleChangeAddIngredients = (e) => {
+        setIngredient(e.target.value);
     };
 
     return (
@@ -44,31 +63,71 @@ const AddDish = ({ dishNameList, setDishNameList }) => {
                             justify='center'
                             alignItems='center'
                         >
-                            <Grid item xs={9}>
+                            <Grid
+                                item
+                                xs={9}
+                                direction='row'
+                                justify='center'
+                                alignItems='center'
+                            >
                                 <CardContent>
                                     <form noValidate autoComplete='off'>
-                                        <TextField
-                                            name='dishName'
-                                            type='text'
-                                            id='dishName'
-                                            label='Dish name'
-                                            variant='outlined'
-                                            placeholder='Dish name'
-                                            value={dishName}
-                                            style={{
-                                                width: '100%',
-                                            }}
-                                            onChange={handleChangeAddDishName}
-                                        />
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                name='dishName'
+                                                type='text'
+                                                id='dishName'
+                                                label='dishName'
+                                                variant='outlined'
+                                                placeholder='dishName'
+                                                value={dishName}
+                                                style={{
+                                                    width: '100%',
+                                                }}
+                                                onChange={
+                                                    handleChangeAddDishName
+                                                }
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField
+                                                name='ingredients'
+                                                type='text'
+                                                id='ingredients'
+                                                label='ingredients'
+                                                variant='outlined'
+                                                placeholder='ingredients'
+                                                value={ingredient}
+                                                style={{
+                                                    width: '100%',
+                                                }}
+                                                onChange={
+                                                    handleChangeAddIngredients
+                                                }
+                                            />
+                                        </Grid>
                                     </form>
                                 </CardContent>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid
+                                item
+                                xs={3}
+                                container
+                                justify='center'
+                                alignItems='center'
+                            >
                                 <CardActions>
                                     <Button
                                         onClick={() => handleClickAddDishName()}
                                     >
-                                        Add dish
+                                        Add Dish
+                                    </Button>
+                                    <Button
+                                        onClick={() =>
+                                            handleClickAddIngredients()
+                                        }
+                                    >
+                                        Add Ingredient
                                     </Button>
                                 </CardActions>
                             </Grid>

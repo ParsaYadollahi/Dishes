@@ -13,11 +13,17 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const myStyles = makeStyles(() => ({}));
 
-const DishList = ({ dishNameList, setDishNameList }) => {
+const DishList = ({
+    dishNameList,
+    setDishNameList,
+    ingredientNameList,
+    setIngredientNameList,
+    dish,
+}) => {
     const classes = myStyles();
 
     const handleDeleteClick = (dishName) => {
-        setDishNameList(dishNameList.filter((dish) => dish !== dishName));
+        setDishNameList(delete dish[dishName]);
     };
     return (
         <>
@@ -28,7 +34,7 @@ const DishList = ({ dishNameList, setDishNameList }) => {
                 alignItems='center'
             >
                 <Grid item xs={12} sm={4}>
-                    {dishNameList.map((dishName, idx) => (
+                    {Object.keys(dish).map((dishName, idx) => (
                         <Card key={idx}>
                             <Grid
                                 container
@@ -39,9 +45,21 @@ const DishList = ({ dishNameList, setDishNameList }) => {
                                 <Grid item xs={9}>
                                     <CardContent>
                                         <Typography>{dishName}</Typography>
+
+                                        {dish[dishName].map((ingredient, k) => (
+                                            <Typography>
+                                                {ingredient}
+                                            </Typography>
+                                        ))}
                                     </CardContent>
                                 </Grid>
-                                <Grid item xs={3}>
+                                <Grid
+                                    item
+                                    xs={3}
+                                    container
+                                    justify='center'
+                                    alignItems='center'
+                                >
                                     <Button
                                         onClick={() =>
                                             handleDeleteClick(dishName)

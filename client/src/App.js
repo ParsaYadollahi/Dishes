@@ -7,6 +7,8 @@ import DishList from './components/DishList';
 
 function App() {
     const [dishNameList, setDishNameList] = useState([]);
+    const [ingredientNameList, setIngredientNameList] = useState([]);
+    const [dish, setDish] = useState({});
 
     return (
         <>
@@ -23,10 +25,17 @@ function App() {
             <AddDish
                 dishNameList={dishNameList}
                 setDishNameList={setDishNameList}
+                ingredientNameList={ingredientNameList}
+                setIngredientNameList={setIngredientNameList}
+                dish={dish}
+                setDish={setDish}
             />
             <DishList
                 dishNameList={dishNameList}
                 setDishNameList={setDishNameList}
+                ingredientNameList={ingredientNameList}
+                setIngredientNameList={setIngredientNameList}
+                dish={dish}
             />
         </>
     );
