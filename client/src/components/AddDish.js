@@ -9,14 +9,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(() => ({}));
+const myStyles = makeStyles(() => ({}));
 
 const INITIAL_DISH_NAME = '';
 
-const AddDish = () => {
-    const classes = useStyles();
+const AddDish = ({ dishNameList, setDishNameList }) => {
+    const classes = myStyles();
 
-    const [dishNameList, setDishNameList] = useState([]);
     const [dishName, setDishName] = useState(INITIAL_DISH_NAME);
 
     const handleClickAddDishName = () => {
@@ -45,8 +44,8 @@ const AddDish = () => {
                             justify='center'
                             alignItems='center'
                         >
-                            <Grid item xs={8}>
-                                <CardContent style={{ width: '100%' }}>
+                            <Grid item xs={9}>
+                                <CardContent>
                                     <form noValidate autoComplete='off'>
                                         <TextField
                                             name='dishName'
@@ -64,14 +63,7 @@ const AddDish = () => {
                                     </form>
                                 </CardContent>
                             </Grid>
-                            <Grid
-                                item
-                                xs={4}
-                                container
-                                direction='row'
-                                justify='center'
-                                alignItems='center'
-                            >
+                            <Grid item xs={3}>
                                 <CardActions>
                                     <Button
                                         onClick={() => handleClickAddDishName()}
